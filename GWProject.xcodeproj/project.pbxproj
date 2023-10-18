@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A24A3DE2AC3BA2D007854A0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A24A3DD2AC3BA2D007854A0 /* UserModel.swift */; };
 		3A3B2D6A2AA12EC800EB62BF /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3B2D692AA12EC800EB62BF /* AuthenticationManager.swift */; };
+		3A7F32502AE064BF00B1F68C /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F324F2AE064BF00B1F68C /* ItemModel.swift */; };
+		3A7F32522AE0682600B1F68C /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F32512AE0682600B1F68C /* ItemViewModel.swift */; };
 		3A821CAC2ACE5B7D00F900AB /* CommonDataFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A821CAB2ACE5B7D00F900AB /* CommonDataFieldView.swift */; };
 		3A821CAE2ACE65A100F900AB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A821CAD2ACE65A100F900AB /* ProfileViewModel.swift */; };
 		3AB0E57B2AC35CCA006F6516 /* MenuOptionViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0E57A2AC35CCA006F6516 /* MenuOptionViewModifier.swift */; };
@@ -59,6 +61,8 @@
 /* Begin PBXFileReference section */
 		3A24A3DD2AC3BA2D007854A0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3A3B2D692AA12EC800EB62BF /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		3A7F324F2AE064BF00B1F68C /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		3A7F32512AE0682600B1F68C /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		3A821CAB2ACE5B7D00F900AB /* CommonDataFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataFieldView.swift; sourceTree = "<group>"; };
 		3A821CAD2ACE65A100F900AB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		3AB0E57A2AC35CCA006F6516 /* MenuOptionViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOptionViewModifier.swift; sourceTree = "<group>"; };
@@ -117,6 +121,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A7F324A2AE0646000B1F68C /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3A7F324D2AE0649900B1F68C /* Models */,
+				3A7F324C2AE0648E00B1F68C /* ViewModels */,
+				3A7F324B2AE0647300B1F68C /* Views */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		3A7F324B2AE0647300B1F68C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3AEF3E022A96B5540050D1F2 /* MainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A7F324C2AE0648E00B1F68C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3A7F32512AE0682600B1F68C /* ItemViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3A7F324D2AE0649900B1F68C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A7F324F2AE064BF00B1F68C /* ItemModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3AB0E5772AC35C78006F6516 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +250,7 @@
 				3ABC323A2ACD1C7A0014D412 /* Pickupscreen */,
 				3ABC32392ACD1C690014D412 /* Giveawayscreen */,
 				3AB0E5772AC35C78006F6516 /* ViewModifiers */,
+				3A7F324A2AE0646000B1F68C /* MainScreen */,
 				3AEF3DE32A93ED0D0050D1F2 /* Authentication */,
 				3AEF3DB02A93E3D40050D1F2 /* Preview Content */,
 			);
@@ -275,7 +314,6 @@
 				3AEF3DF02A95AB510050D1F2 /* LoginView.swift */,
 				3AEF3DF62A95B11C0050D1F2 /* SignUpView.swift */,
 				3AEF3E002A96AE4E0050D1F2 /* ResetPasswordView.swift */,
-				3AEF3E022A96B5540050D1F2 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +469,7 @@
 				3AEF3E032A96B5540050D1F2 /* MainView.swift in Sources */,
 				3AEF3DB42A93E3D40050D1F2 /* Persistence.swift in Sources */,
 				3ABC32412ACD1DC30014D412 /* PickupView.swift in Sources */,
+				3A7F32522AE0682600B1F68C /* ItemViewModel.swift in Sources */,
 				3ABC32472ACD1E430014D412 /* SettingView.swift in Sources */,
 				3ABC323F2ACD1D190014D412 /* GiveawayView.swift in Sources */,
 				3ABC32452ACD1E1A0014D412 /* RewardView.swift in Sources */,
@@ -440,6 +479,7 @@
 				3A821CAC2ACE5B7D00F900AB /* CommonDataFieldView.swift in Sources */,
 				3AEF3DFB2A95B28A0050D1F2 /* SignUpModel.swift in Sources */,
 				3A24A3DE2AC3BA2D007854A0 /* UserModel.swift in Sources */,
+				3A7F32502AE064BF00B1F68C /* ItemModel.swift in Sources */,
 				3AEF3DF12A95AB510050D1F2 /* LoginView.swift in Sources */,
 				3AEF3E012A96AE4E0050D1F2 /* ResetPasswordView.swift in Sources */,
 				3AB0E57B2AC35CCA006F6516 /* MenuOptionViewModifier.swift in Sources */,
