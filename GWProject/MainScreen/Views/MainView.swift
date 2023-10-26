@@ -8,15 +8,27 @@
 import SwiftUI
 import Firebase
 import FirebaseAuth
+import PhotosUI
+@MainActor
+
 
 struct MainView: View {
     @State var isSignout = false
     @State var menuClick = false
     @EnvironmentObject var authManager : AuthenticationManager
     @State var userData : UserModel = .init(firstname: .init(), lastname: .init(), email: .init(), phone: .init(), address: .init())
-//    let menuOptions = ["Profile", "Sells & Buys", "Contact", "LogOut"]
+    
+    @StateObject var itemViewModel = ItemViewModel()
+    @State var itemModel : ItemModel = .init( title: .init(), description: .init(), givingType: .init(), itemCategory: .init(), userId: .init(), postedOn: .init(),expiresOn: .init())
+    
+    
+    @State var sample : String = ""
+    @State var addItemButton:Bool = false
+    
+    @State var selectedItems : [PhotosPickerItem] = []
+    
     var body: some View {
-        GeometryReader{ geo in            
+        GeometryReader{ geo in
             if isSignout{
                 LoginView()
                     .navigationBarBackButtonHidden()
@@ -48,9 +60,34 @@ struct MainView: View {
                                 .fontWeight(.bold)
                             Spacer()
                         }
+                        
                         .frame(width: geo.size.width*1, height: geo.size.height*0.07)
                         
                         .background(RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650))
+                        Spacer()
+                        
+                        Button {
+                            addItemButton.toggle()
+                        } label: {
+                            if addItemButton{
+                                Text("X")
+                                    .foregroundColor(.black)
+                            }else{
+                                Text("Add button")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if addItemButton {
+                            withAnimation{
+                                
+                                self.AddItemView
+                                    .transition(.move(edge: .trailing))
+                                    .animation(.easeIn)
+
+                            }
+                        }
+                        
+                        
                         Spacer()
                         if menuClick {
                             withAnimation{
@@ -63,14 +100,14 @@ struct MainView: View {
                                             if let userData = data {
                                                 self.userData = userData
                                             } else {
-                                            self.userData = UserModel(firstname: "NA", lastname: "NA", email: "NA", phone: "NA", address: "NA")
+                                                self.userData = UserModel(firstname: "NA", lastname: "NA", email: "NA", phone: "NA", address: "NA")
                                             }
                                         }
                                     }
                             }
                         }
                         
-                        Spacer()
+                        
                     }
                     
                 }
@@ -83,6 +120,57 @@ struct MainView: View {
         .ignoresSafeArea()
         
     }
+    
+    private var AddItemView: some View {
+        GeometryReader { geo in
+            ZStack {
+                RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650)
+                VStack {
+                    TextField("Title", text: $itemModel.title)
+                        .foregroundColor(.black)
+                        .background(.white)
+                    TextField("Description", text: $itemModel.description)
+                        .foregroundColor(.black)
+                        .background(.white)
+                    TextField("Category", text: $itemModel.itemCategory)
+                        .foregroundColor(.black)
+                        .background(.white)
+                    TextField("Pick Type", text: $itemModel.givingType)
+                        .foregroundColor(.black)
+                        .background(.white)
+                    DatePicker("Expiry Date", selection: $itemModel.expiresOn, in: Date()..., displayedComponents: .date)
+                               .labelsHidden()
+                               .foregroundColor(.white)
+                               .background(.white)
+                    HStack {
+                        ForEach(selectedItems, id: \.self) { item in
+                            ImageView(item: item)
+                        }
+                    }
+
+                    PhotosPicker(selection: $selectedItems, matching: .images, photoLibrary: .shared()) {
+                        Text("Select imgs")
+                            .foregroundColor(.white)
+                    
+                    }
+                    
+                    
+                    Button {
+                        itemViewModel.addItem(title: itemModel.title , description: itemModel.description, category: itemModel.itemCategory, picktype: itemModel.givingType, userId: authManager.currUserId, expireDate: itemModel.expiresOn, selectedItems: selectedItems)
+                        
+                        addItemButton = true
+                    
+                    } label: {
+                        Text("add")
+                    }
+                    .foregroundColor(.black)
+                    .background(.white)
+                }
+                .frame(width: geo.size.width * 1, height: geo.size.height * 1.2, alignment: .leading)
+            }
+        }
+    }
+
     
     
     private var menuSliderView: some View {
@@ -221,5 +309,4 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
-
 
