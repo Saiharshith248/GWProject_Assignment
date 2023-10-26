@@ -9,13 +9,14 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import PhotosUI
+@MainActor
+
 
 struct MainView: View {
     @State var isSignout = false
     @State var menuClick = false
     @EnvironmentObject var authManager : AuthenticationManager
     @State var userData : UserModel = .init(firstname: .init(), lastname: .init(), email: .init(), phone: .init(), address: .init())
-    //    let menuOptions = ["Profile", "Sells & Buys", "Contact", "LogOut"]
     
     @StateObject var itemViewModel = ItemViewModel()
     @State var itemModel : ItemModel = .init( title: .init(), description: .init(), givingType: .init(), itemCategory: .init(), userId: .init(), postedOn: .init(),expiresOn: .init())
@@ -23,6 +24,8 @@ struct MainView: View {
     
     @State var sample : String = ""
     @State var addItemButton:Bool = false
+    
+    @State var selectedItems : [PhotosPickerItem] = []
     
     var body: some View {
         GeometryReader{ geo in
@@ -138,13 +141,25 @@ struct MainView: View {
                     DatePicker("Expiry Date", selection: $itemModel.expiresOn, in: Date()..., displayedComponents: .date)
                                .labelsHidden()
                                .foregroundColor(.white)
-                               .background(.black)
+                               .background(.white)
+                    HStack {
+                        ForEach(selectedItems, id: \.self) { item in
+                            ImageView(item: item)
+                        }
+                    }
+
+                    PhotosPicker(selection: $selectedItems, matching: .images, photoLibrary: .shared()) {
+                        Text("Select imgs")
+                            .foregroundColor(.white)
                     
-                    
+                    }
                     
                     
                     Button {
-                        itemViewModel.addItem(title: itemModel.title , description: itemModel.description, category: itemModel.itemCategory, picktype: itemModel.givingType, userId: authManager.currUserId, expireDate: itemModel.expiresOn)
+                        itemViewModel.addItem(title: itemModel.title , description: itemModel.description, category: itemModel.itemCategory, picktype: itemModel.givingType, userId: authManager.currUserId, expireDate: itemModel.expiresOn, selectedItems: selectedItems)
+                        
+                        addItemButton = true
+                    
                     } label: {
                         Text("add")
                     }
@@ -294,5 +309,4 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
-
 

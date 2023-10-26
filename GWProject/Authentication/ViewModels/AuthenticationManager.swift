@@ -104,34 +104,6 @@ class AuthenticationManager : ObservableObject{
         
     }
     
-//    func getCurrUserData(uid : String, completion: @escaping (UserModel?) -> Void) -> UserModel{
-//        var userData = UserModel(firstname: "NA", lastname: "NA", email: "NA", phone: "NA", address: "NA")
-//        let db = Firestore.firestore()
-//        let userRef = db.collection("users").document(uid)
-//        userRef.getDocument { (document, error) in
-//            if let error = error {
-//                print("Error retrieving data: \(error)")
-//                completion(nil)
-//            } else {
-//                if let document = document, document.exists {
-//                    let data = document.data()
-//
-//                    userData.email = data!["email"] as! String
-//                    userData.address = data!["address"] as! String
-//                    userData.firstname = data!["firstName"] as! String
-//                    userData.lastname = data!["lastName"] as! String
-//                    userData.phone = data!["phone"] as! String
-//                    completion(userData)
-//
-//
-//                }else {
-//                    print("Document does not exist")
-//                    completion(nil)
-//                }
-//            }
-//        }
-//        return userData
-//    }
  
     func getCurrUserData(uid: String, completion: @escaping (UserModel?) -> Void) {
         let db = Firestore.firestore()

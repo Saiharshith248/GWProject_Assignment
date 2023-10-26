@@ -1,10 +1,19 @@
 import SwiftUI
+import PhotosUI
+import FirebaseStorage
 
 struct ProfileView: View {
     @EnvironmentObject var authManager : AuthenticationManager
     @State var userData : UserModel = .init(firstname: .init(), lastname: .init(), email: .init(), phone: .init(), address: .init())
-    @State var sample = "Harshith"
+    @State var addProfilePicClicked : Bool = false
+    
+    @State var profilePic : PhotosPickerItem? = nil
+    
+    @State var currProfilePic : PhotosPickerItem? = nil
+    @State private var getsavedProfilePic : UIImage?
     @State var editOn : Bool = false
+    
+    
     var body: some View {
         GeometryReader{ geo in
             NavigationView {
@@ -36,11 +45,28 @@ struct ProfileView: View {
                         Spacer()
                         VStack{
                             VStack{
-                                Image(systemName: "person.fill")
-                                    .resizable()
-                                    .foregroundColor(.black)
+                                HStack{
+                                    Spacer()
+                                    if (currProfilePic != nil){
+                                        ImageView(item: currProfilePic!)
+                                    }else{
+                                        if let image = getsavedProfilePic {
+                                                    Image(uiImage: image)
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .frame(width: 50, height: 50) // Adjust the size as needed
+                                                }
+                                    }
+                                    Spacer()
+                                    PhotosPicker(selection: $profilePic, matching: .images, photoLibrary: .shared()) {
+                                        Text("Add")
+                                            .foregroundColor(.white)
+                                    }
+                                        
+                                    Spacer()
+                                }
                             }
-                            .frame(width: 50,height: 50,alignment: .center)
+                            .frame(width: geo.size.width * 1,height: 50,alignment: .center)
                             .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 10))
                             Section{
                                 Text("first name*")
@@ -89,7 +115,7 @@ struct ProfileView: View {
                             
                             HStack{
                                 Button{
-                                    saveUserDetails(userId: authManager.currUserId, userModel: userData)
+                                    saveUserDetails(userId: authManager.currUserId, userModel: userData, pic: profilePic!)
                                 }label: {
                                     HStack{
                                         Image(systemName: "bookmark.fill")
@@ -118,7 +144,7 @@ struct ProfileView: View {
                             }
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                             Spacer()
-                    
+                            
                         }
                         .frame(maxWidth: geo.size.width * 1, maxHeight: .infinity)
                         
@@ -131,6 +157,11 @@ struct ProfileView: View {
                                     self.userData = UserModel(firstname: "NA", lastname: "NA", email: "NA", phone: "NA", address: "NA")
                                 }
                             }
+                            getProfilePic(userId: authManager.currUserId)
+                            
+                        }
+                        .onChange(of: profilePic) { newValue in
+                            currProfilePic = newValue
                         }
                         
                     }
@@ -143,6 +174,26 @@ struct ProfileView: View {
         }
         
     }
+    
+    
+    func getProfilePic(userId : String) {
+        
+            let storage = Storage.storage()
+            let storageRef = storage.reference()
+            let folderPath = "profilePics/\(userId)"
+            let fileName = "image.jpeg"
+            let fileRef = storageRef.child(folderPath).child(fileName)
+            
+            fileRef.getData(maxSize: 1 * 3024 * 3024) { data, error in
+                if let error = error {
+                    print("Error downloading file: \(error.localizedDescription)")
+                } else {
+                    if let imageData = data {
+                        getsavedProfilePic = UIImage(data: imageData)
+                    }
+                }
+            }
+        }
     
 }
 

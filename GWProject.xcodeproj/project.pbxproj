@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A24A3DE2AC3BA2D007854A0 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A24A3DD2AC3BA2D007854A0 /* UserModel.swift */; };
 		3A3B2D6A2AA12EC800EB62BF /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3B2D692AA12EC800EB62BF /* AuthenticationManager.swift */; };
+		3A4865282AE99F3E00B1F764 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4865272AE99F3E00B1F764 /* ImageView.swift */; };
+		3A48652A2AE9AC3500B1F764 /* ProfilePicPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4865292AE9AC3500B1F764 /* ProfilePicPickerViewModel.swift */; };
 		3A7F32502AE064BF00B1F68C /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F324F2AE064BF00B1F68C /* ItemModel.swift */; };
 		3A7F32522AE0682600B1F68C /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7F32512AE0682600B1F68C /* ItemViewModel.swift */; };
 		3A821CAC2ACE5B7D00F900AB /* CommonDataFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A821CAB2ACE5B7D00F900AB /* CommonDataFieldView.swift */; };
@@ -19,6 +21,8 @@
 		3ABC32452ACD1E1A0014D412 /* RewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC32442ACD1E1A0014D412 /* RewardView.swift */; };
 		3ABC32472ACD1E430014D412 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC32462ACD1E430014D412 /* SettingView.swift */; };
 		3ABC32492ACD1E5A0014D412 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABC32482ACD1E5A0014D412 /* ContactView.swift */; };
+		3AC9968D2AE836D300644CC5 /* ItemPhotoPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9968C2AE836D300644CC5 /* ItemPhotoPickerViewModel.swift */; };
+		3AC9968F2AE84D0B00644CC5 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3AC9968E2AE84D0B00644CC5 /* FirebaseStorage */; };
 		3AD2A8552AC4AF4300CF9BC9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD2A8542AC4AF4300CF9BC9 /* ProfileView.swift */; };
 		3AEF3DAB2A93E3D30050D1F2 /* GWProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF3DAA2A93E3D30050D1F2 /* GWProjectApp.swift */; };
 		3AEF3DAD2A93E3D30050D1F2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEF3DAC2A93E3D30050D1F2 /* ContentView.swift */; };
@@ -61,6 +65,8 @@
 /* Begin PBXFileReference section */
 		3A24A3DD2AC3BA2D007854A0 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3A3B2D692AA12EC800EB62BF /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		3A4865272AE99F3E00B1F764 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		3A4865292AE9AC3500B1F764 /* ProfilePicPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicPickerViewModel.swift; sourceTree = "<group>"; };
 		3A7F324F2AE064BF00B1F68C /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		3A7F32512AE0682600B1F68C /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		3A821CAB2ACE5B7D00F900AB /* CommonDataFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataFieldView.swift; sourceTree = "<group>"; };
@@ -71,6 +77,7 @@
 		3ABC32442ACD1E1A0014D412 /* RewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardView.swift; sourceTree = "<group>"; };
 		3ABC32462ACD1E430014D412 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		3ABC32482ACD1E5A0014D412 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		3AC9968C2AE836D300644CC5 /* ItemPhotoPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPhotoPickerViewModel.swift; sourceTree = "<group>"; };
 		3AD2A8542AC4AF4300CF9BC9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3AEF3DA72A93E3D30050D1F2 /* GWProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GWProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AEF3DAA2A93E3D30050D1F2 /* GWProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GWProjectApp.swift; sourceTree = "<group>"; };
@@ -100,6 +107,7 @@
 				3AEF3DDF2A93E6AC0050D1F2 /* FirebaseAnalyticsSwift in Frameworks */,
 				3AEF3DFF2A9660310050D1F2 /* FirebaseFirestore in Frameworks */,
 				3AEF3DE22A93EB280050D1F2 /* FirebaseAuth in Frameworks */,
+				3AC9968F2AE84D0B00644CC5 /* FirebaseStorage in Frameworks */,
 				3AEF3DDD2A93E6AC0050D1F2 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				3A7F32512AE0682600B1F68C /* ItemViewModel.swift */,
+				3AC9968C2AE836D300644CC5 /* ItemPhotoPickerViewModel.swift */,
+				3A4865272AE99F3E00B1F764 /* ImageView.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -209,6 +219,7 @@
 				3AD2A8542AC4AF4300CF9BC9 /* ProfileView.swift */,
 				3A821CAB2ACE5B7D00F900AB /* CommonDataFieldView.swift */,
 				3A821CAD2ACE65A100F900AB /* ProfileViewModel.swift */,
+				3A4865292AE9AC3500B1F764 /* ProfilePicPickerViewModel.swift */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -347,6 +358,7 @@
 				3AEF3DDE2A93E6AC0050D1F2 /* FirebaseAnalyticsSwift */,
 				3AEF3DE12A93EB280050D1F2 /* FirebaseAuth */,
 				3AEF3DFE2A9660310050D1F2 /* FirebaseFirestore */,
+				3AC9968E2AE84D0B00644CC5 /* FirebaseStorage */,
 			);
 			productName = GWProject;
 			productReference = 3AEF3DA72A93E3D30050D1F2 /* GWProject.app */;
@@ -475,6 +487,8 @@
 				3ABC32452ACD1E1A0014D412 /* RewardView.swift in Sources */,
 				3A821CAE2ACE65A100F900AB /* ProfileViewModel.swift in Sources */,
 				3AEF3DAD2A93E3D30050D1F2 /* ContentView.swift in Sources */,
+				3AC9968D2AE836D300644CC5 /* ItemPhotoPickerViewModel.swift in Sources */,
+				3A48652A2AE9AC3500B1F764 /* ProfilePicPickerViewModel.swift in Sources */,
 				3ABC32492ACD1E5A0014D412 /* ContactView.swift in Sources */,
 				3A821CAC2ACE5B7D00F900AB /* CommonDataFieldView.swift in Sources */,
 				3AEF3DFB2A95B28A0050D1F2 /* SignUpModel.swift in Sources */,
@@ -484,6 +498,7 @@
 				3AEF3E012A96AE4E0050D1F2 /* ResetPasswordView.swift in Sources */,
 				3AB0E57B2AC35CCA006F6516 /* MenuOptionViewModifier.swift in Sources */,
 				3AEF3DF72A95B11C0050D1F2 /* SignUpView.swift in Sources */,
+				3A4865282AE99F3E00B1F764 /* ImageView.swift in Sources */,
 				3A3B2D6A2AA12EC800EB62BF /* AuthenticationManager.swift in Sources */,
 				3AEF3DAB2A93E3D30050D1F2 /* GWProjectApp.swift in Sources */,
 				3AD2A8552AC4AF4300CF9BC9 /* ProfileView.swift in Sources */,
@@ -819,6 +834,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3AC9968E2AE84D0B00644CC5 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3AEF3DDB2A93E6AC0050D1F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		3AEF3DDC2A93E6AC0050D1F2 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3AEF3DDB2A93E6AC0050D1F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
