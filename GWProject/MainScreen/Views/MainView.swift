@@ -9,6 +9,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import PhotosUI
+import FirebaseStorage
 @MainActor
 
 
@@ -21,6 +22,7 @@ struct MainView: View {
     @StateObject var itemViewModel = ItemViewModel()
     @State var itemModel : ItemModel = .init( title: .init(), description: .init(), givingType: .init(), itemCategory: .init(), userId: .init(), postedOn: .init(),expiresOn: .init())
     
+    @State private var getsavedProfilePic : UIImage?
     
     @State var sample : String = ""
     @State var addItemButton:Bool = false
@@ -36,46 +38,60 @@ struct MainView: View {
                 
             }else{
                 NavigationView {
-                    VStack{
-                        HStack{
-                            if !menuClick{
-                                Button{
-                                    menuClick.toggle()
-                                }label: {
-                                    Image("menu")
-                                        .padding(.leading,15)
+                    ZStack{
+                        Color("bgcolor")
+                        VStack{
+                            Spacer()
+                            HStack{
+                            
+                                if !menuClick{
+                                    Button{
+                                        
+                                        menuClick.toggle()
+                                        addItemButton = false
+                                    }label: {
+                                        Image("menu")
+                                            .padding(.leading,15)
+                                    }
+                                }else{
+                                    Button{
+                                        menuClick.toggle()
+                                    }label: {
+                                        Image("close")
+                                            .padding(.leading,15)
+                                    }
                                 }
-                            }else{
-                                Button{
-                                    menuClick.toggle()
-                                }label: {
-                                    Image("close")
-                                        .padding(.leading,15)
+                                Spacer()
+                                Text("GiveAway")
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 25))
+                                    .fontWeight(.bold)
+                                Spacer()
+                                Button {
+                                    addItemButton.toggle()
+                                    menuClick = false
+                                } label: {
+                                    if addItemButton{
+                                        Text("X")
+                                            .foregroundColor(.white)
+                                    }else{
+                                        Text("Add button")
+                                            .foregroundColor(.white)
+                                    }
                                 }
                             }
-                            Spacer()
-                            Text("GiveAway")
-                                .foregroundColor(.white)
-                                .font(.system(size: 25))
-                                .fontWeight(.bold)
-                            Spacer()
-                        }
-                        
-                        .frame(width: geo.size.width*1, height: geo.size.height*0.07)
-                        
-                        .background(RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650))
-                        Spacer()
-                        
-                        Button {
-                            addItemButton.toggle()
-                        } label: {
-                            if addItemButton{
-                                Text("X")
-                                    .foregroundColor(.black)
-                            }else{
-                                Text("Add button")
-                                    .foregroundColor(.black)
+                            .padding(.top,30)
+//                            .position(x: UIScreen.main.bounds.width / 2, y:30)
+                            .frame(height: geo.size.height * 0.1)
+                            .background(RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650))
+                            
+                            
+                            VStack{
+                                
                             }
+                            .frame(width: geo.size.width * 1,height: geo.size.height * 0.9)
+                            .background(.white)
+                            
                         }
                         if addItemButton {
                             withAnimation{
@@ -94,7 +110,7 @@ struct MainView: View {
                                 
                                 self.menuSliderView
                                     .transition(.move(edge: .leading))
-                                    .animation(.easeIn)
+                                    .animation(.easeInOut)
                                     .onAppear{
                                         authManager.getCurrUserData(uid: authManager.currUserId) { data in
                                             if let userData = data {
@@ -114,7 +130,7 @@ struct MainView: View {
                 .navigationBarBackButtonHidden(true)
                 
             }
-            
+                
             
         }
         .ignoresSafeArea()
@@ -126,6 +142,13 @@ struct MainView: View {
             ZStack {
                 RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650)
                 VStack {
+                    Button{
+                        addItemButton = false
+                    }label: {
+                        Image("close")
+                            .padding(.leading,15)
+                            .foregroundColor(.white)
+                    }
                     TextField("Title", text: $itemModel.title)
                         .foregroundColor(.black)
                         .background(.white)
@@ -166,8 +189,9 @@ struct MainView: View {
                     .foregroundColor(.black)
                     .background(.white)
                 }
-                .frame(width: geo.size.width * 1, height: geo.size.height * 1.2, alignment: .leading)
+                .frame(width: geo.size.width * 1,  alignment: .leading)
             }
+            .offset(x: addItemButton ? 0 : -geo.size.width * 0.8, y: geo.size.height * 0.12)
         }
     }
 
@@ -178,15 +202,23 @@ struct MainView: View {
         GeometryReader { geo in
             ZStack{
                 RadialGradient(gradient: Gradient(colors: [Color("bgcolor"), .black]), center: .center, startRadius: 2, endRadius: 650)
+                
                 VStack {
-                    
                     ScrollView{
                         HStack{
                             Spacer(minLength: 5)
                             VStack{
-                                Image(systemName: "person")
-                                    .resizable()
-                                    .foregroundColor(.white)
+                            
+                                if let image = getsavedProfilePic {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .foregroundColor(.white)
+                                    
+                                }else{
+                                    Image(systemName: "person")
+                                        .resizable()
+                                        .foregroundColor(.white)
+                                }
                             }
                             .frame(width: 90,height: 90,alignment: .leading)
                             Spacer()
@@ -201,6 +233,9 @@ struct MainView: View {
                         }
                         .frame(width: geo.size.width * 1, height: geo.size.height * 0.2)
                         .background(.opacity(0.05))
+                        .onAppear{
+                            getProfilePic(userId: authManager.currUserId)
+                        }
                         NavigationLink(destination: ProfileView()) {
                             HStack{
                                 Image(systemName: "person")
@@ -288,18 +323,41 @@ struct MainView: View {
                         }
                         
                     }
+                
+                
                     
                     
                     
                 }
-                .frame(width: geo.size.width * 1,height: geo.size.height*1.2 ,alignment: .leading)
+                .frame(width: geo.size.width * 1 ,height: geo.size.height * 1  ,alignment: .leading)
                 
                 
             }
+            .offset(x: menuClick ? 0 : -geo.size.width * 0.8, y: geo.size.height * 0.12)
+            
         }
         
     }
+    
+    
+    func getProfilePic(userId : String) {
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        let folderPath = "profilePics/\(userId)"
+        let fileName = "image.jpeg"
+        let fileRef = storageRef.child(folderPath).child(fileName)
         
+        fileRef.getData(maxSize: 1 * 3024 * 3024) { data, error in
+            if let error = error {
+                print("Error downloading file: \(error.localizedDescription)")
+            } else {
+                if let imageData = data {
+                    getsavedProfilePic = UIImage(data: imageData)
+                }
+            }
+        }
+    }
+    
 }
 
 
